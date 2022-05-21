@@ -1,6 +1,5 @@
 <template>
     <div class="bg-[#151515] h-screen w-screen flex justify-center items-center flex-col">
-        <Project/>
         <div class="head">
             <h3>Projects</h3>
         </div>
@@ -10,7 +9,7 @@
             </NuxtLink>
         </div>
         <div class="boxexistence border-10 border-solid border-[#fff]">
-            
+            <Project />
         </div>
     </div>
 </template>
@@ -44,10 +43,3 @@
 }
 </style>
 
-<script>
-    import Project from "../components/Project/Project.vue"
-
-    components: {
-        Project
-    }
-</script>
