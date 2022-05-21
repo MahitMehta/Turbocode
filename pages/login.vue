@@ -1,5 +1,5 @@
 <template>
-    <div class="flex justify-center h-screen container w-screen">
+    <div class="bg-[#151515] h-screen w-screen flex justify-center items-center flex-col">
         <div class="p-4 w-[25%] bg-white rounded-lg border border-gray-200 shadow-md sm:p-6 lg:p-8 dark:bg-gray-800 dark:border-gray-700">
     <form class="space-y-6 w-[100%]" action="#">
         <h5 class="text-xl font-medium text-gray-900 dark:text-white">Login</h5>
@@ -20,7 +20,7 @@
 </div>
 </template>
 
-<style>
+<style scoped>
 .container {
     font-family: 'Courier New';
     display: flex;

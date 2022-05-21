@@ -35,7 +35,7 @@ export const Mutation = mutationType({
         const res = await prisma.user.create({
           data: { email, pass: hash, name, roles: [ type ]}
         });
-        return res; 
+        return res;
       }
     })
   
