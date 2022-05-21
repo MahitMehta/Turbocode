@@ -12,7 +12,7 @@
                 :options="cmOptions"
                 :value="code"
                 border
-                style="width:100%;height:100%;border: none; border-radius:0px"
+                style="width:100%;height:calc(100% - 380px);border: none; border-radius:0px"
                 placeholder="test placeholder"
                 @change="change"
             />
