@@ -8,10 +8,14 @@
         </div>
         <div class="align-items-center w-[12%] h-[30%] buttonline">
             <div class="sign">
-                <button type="button" class="button w-[75%] h-[100%] text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-[50px] mr-2 mb-2 ">Sign Up</button>
+                <NuxtLink to="pages/signup">
+                    <button type="button" class="button w-[75%] h-[100%] text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mt-[50px] mr-2 mb-2 ">Sign Up</button>
+                </NuxtLink>
             </div>
             <div class="log w-[100%]">
-                <button type="button" class="button w-[100%] h-[100%] text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Log In</button>        
+                <NuxtLink to="pages/login">
+                    <button type="button" class="button w-[100%] h-[100%] text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 mb-2">Log In</button>        
+                </NuxtLink>
             </div>
         </div>
     </div>
