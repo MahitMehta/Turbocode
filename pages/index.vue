@@ -1,5 +1,5 @@
 <template>
-    <div class="container h-screen">
+    <div class="container h-screen w-screen">
         <div class="heading">
             <p>Morb.it</p>
         </div>
