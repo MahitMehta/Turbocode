@@ -1,8 +1,5 @@
 <template>
     <div class="flex flex-col bg-grey w-full relative">
-        <ClientOnly >
-            <code-terminal :code="code"/>
-        </ClientOnly>
         <nav class="w-full h-14 bg-grey justify-end flex py-2 px-6">
             <div @click="this.$bus.$emit('runTerminal')" class="flex space-x-2 items-center cursor-pointer">
                 <font-awesome-icon :width="12" color="#fff" :icon="['fas', 'play']" />
@@ -10,6 +7,7 @@
             </div>
         </nav>
         <ClientOnly>
+            <code-terminal :code="code"/>
             <Codemirror
                 :options="cmOptions"
                 :value="code"
@@ -71,6 +69,10 @@ export default {
 
     .CodeMirror-selected {
         background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .CodeMirror-sizer {
+        margin-left: 29px !important;
     }
 
     .CodeMirror * {

@@ -1,5 +1,5 @@
 <template>
-    <section class="p-4 h-full w-[400px] bg-grey border-r-[#32342f] border-solid border-r-1 border z-10">
+    <section class="p-4 h-full min-w-[350px] w-[350px] bg-grey border-r-[#32342f] border-solid border-r-1 border z-10">
         <p class="text-white uppercase text-xs">Explorer
              
         </p>
