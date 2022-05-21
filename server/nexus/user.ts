@@ -41,9 +41,8 @@ export const Mutation = extendType({
       args: {
         email: nonNull(stringArg()),
         pass: nonNull(stringArg()),
-        type: nonNull(stringArg())
       },
-      resolve: async (_root, { email, pass, type }, { prisma, res }) => {
+      resolve: async (_root, { email, pass }, { prisma, res }) => {
         const user = await prisma.user.findFirst({
           where: {email}
         })

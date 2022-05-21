@@ -74,7 +74,7 @@
 
                     console.log(email, pass, username);
                 if (!email || !pass || !username) {
-                    this.$data.error = "Please enter a valid email, password, or username.";
+                    this.$data.error = "Please enter a valid email, password, and username.";
                     return;
                 }; 
 

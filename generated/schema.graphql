@@ -6,7 +6,7 @@ type Mutation {
   createUser(email: String!, pass: String!, username: String!): User
   createUserFile(code: String, filePath: String!, name: String!, srcProjectId: String!): UserFile
   createUserProject(id: String!, name: String!, ownerId: String!): UserProject
-  loginClient(email: String!, pass: String!, type: String!): User
+  loginClient(email: String!, pass: String!): User
 }
 
 type Query {

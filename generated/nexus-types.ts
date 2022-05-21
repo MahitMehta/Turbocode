@@ -142,7 +142,6 @@ export interface NexusGenArgTypes {
     loginClient: { // args
       email: string; // String!
       pass: string; // String!
-      type: string; // String!
     }
   }
 }

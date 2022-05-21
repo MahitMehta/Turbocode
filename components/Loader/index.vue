@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div class="loader-container">
         <span class="line" v-for="i in count" :key="i" :style="assignStyles(i)"/>
     </div>
 </template>
@@ -28,7 +28,7 @@
     }
 </script>
 <style scoped>
-    .container {
+    .loader-container {
         width: 20px;
         height: 20px;
         display: flex;

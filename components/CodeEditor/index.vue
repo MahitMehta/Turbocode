@@ -30,21 +30,7 @@ export default {
         return {
             width: 0,
             height: 0,
-            code: `import java.io.*; 
-
-public class Entry {
-  public static void main(String[] args) {
-   	try {
-     	BufferedReader inp = new BufferedReader (new InputStreamReader(System.in));
-         System.out.print("First Name: ");
-    	String firstName = inp.readLine();
-  		System.out.println("Hi, " + firstName);
-    } catch (IOException e) {
-     	System.out.println("Error");
-    }
-  }
-}
-            `,
+            code: ``,
             cmOptions: {
                 mode: "text/x-java", 
                 theme: "monokai", 
