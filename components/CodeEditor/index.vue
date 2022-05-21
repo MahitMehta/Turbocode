@@ -25,6 +25,7 @@
 export default {
     methods: {
         change(e:string) {
+           localStorage.setItem("code", e);
            this.$data.code = e;
         }
     },
@@ -32,7 +33,7 @@ export default {
         return {
             width: 0,
             height: 0,
-            code: ``,
+            code: `// New Java File...\n`,
             cmOptions: {
                 mode: "text/x-java", 
                 theme: "monokai", 
@@ -46,6 +47,11 @@ export default {
         }
     },
     mounted() {
+        const cachedCode = localStorage.getItem("code");
+        if (!!cachedCode) {
+            this.$data.code = cachedCode; 
+        }
+
         this.$data.width = window.innerWidth * 0.5; 
         this.$data.height = window.innerHeight; 
     }

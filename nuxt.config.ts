@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     publicRuntimeConfig: {
         graphqlApiURL: process.env.GRAPHQL_API_URL || "http://localhost:3000/api/graphql",
     },
+    ssr: true,
     vite: {
         server: {
             headers: {

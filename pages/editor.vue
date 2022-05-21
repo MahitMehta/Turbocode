@@ -1,8 +1,7 @@
 <template>
     <div class="h-screen flex">
         <CodeNavigator />
-       
-            <CodeEditor />
+        <CodeEditor />
    
     </div>
 </template>

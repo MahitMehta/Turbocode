@@ -18,7 +18,7 @@ export default {
             worker: undefined,
             term: undefined,
             blobUrl: undefined,
-            shellPrompt: "mahitmehta@Mahits-MacBook-Air-1189 ~ % ",
+            shellPrompt: "user@00:00:00 ~ % ",
             programRunning: false,
         }
     },
@@ -120,12 +120,15 @@ export default {
                 }  
             };
         },
-        promptTerm() {
-            this.$data.term.write('\r\n' + this.$data.shellPrompt);
+        async promptTerm() {
+            const moment = await import("moment");
+            const shellPrompt=  `user@${moment.default().format().toString()} ~ % `;
+            this.$data.term.write('\r\n' + shellPrompt);
         }
     },
     async mounted() {
-        console.log(navigator.userAgent);
+        const moment = await import("moment");
+        this.$data.shellPrompt = `user@${moment.default().format().toString()} ~ % `;
 
         this.$bus.$on("runTerminal", () => {
            // this.term.clear();
