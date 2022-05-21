@@ -45,7 +45,7 @@ export default {
             // 
             const buildURL = process.env.NODE_ENV === "development" ? 
                 "http://localhost:8080" : 
-                ""; //https://us-central1-mah-it.cloudfunctions.net/jbytecoder-builder
+                "https://us-central1-mah-it.cloudfunctions.net/jbytecoder-builder"; //https://us-central1-mah-it.cloudfunctions.net/jbytecoder-builder
             
             const res = await fetch(buildURL, {
                 method: "POST",
@@ -135,7 +135,18 @@ export default {
         this.$data.generalInt32 = new Int32Array(this.$data.generalSAB);
         this.$data.inputInt32 = new Int32Array(this.$data.inputSAB);
 
-        const worker = new Worker("./assets/pwa/codebuilder.worker.ts");
+        let workerURL; 
+
+        if (process.env.NODE_ENV === "development") {
+            workerURL = "./assets/pwa/codebuilder.worker.js";
+        } else {
+            const file = await fetch("https://d1cllsacqk1ao3.cloudfront.net/codebuilder.worker.js");
+            const blob = await file.blob();
+            const blobUrl = window.URL.createObjectURL(blob);
+            workerURL = blobUrl;
+        }
+       
+        const worker = new Worker(workerURL);
         this.$data.worker = worker;
 
         this.buildProgram();
