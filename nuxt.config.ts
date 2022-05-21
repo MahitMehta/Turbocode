@@ -6,21 +6,16 @@ export default defineNuxtConfig({
     publicRuntimeConfig: {
         graphqlApiURL: process.env.GRAPHQL_API_URL || "http://localhost:3000/api/graphql",
     },
+    vite: {
+        server: {
+            headers: {
+                "Cross-Origin-Embedder-Policy": "require-corp"
+            }
+        }
+    },
     app: {
         head: {
-            title: 'C4T Game',
-            htmlAttrs: {
-                lang: 'en',
-            },
-            meta: [
-                { charset: 'utf-8' },
-                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-                { hid: 'description', name: 'description', content: '' },
-                { name: 'format-detection', content: 'telephone=no' },
-                { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
-            ],
-            link: [],
-            script: [],
+            title: 'Morb.it',
         },
     },
     css: ['@/assets/css/main.css'],
@@ -32,10 +27,34 @@ export default defineNuxtConfig({
     buildModules: [
         // https://go.nuxtjs.dev/tailwindcss
         '@nuxtjs/tailwindcss',
+        '@nuxt-hero-icons/solid/nuxt',
+        '@nuxt-hero-icons/outline/nuxt'
     ],
     plugins: [
         "~/plugins/apolloClient.ts",
+        "~/plugins/codemirror.client.ts",
+        "~/plugins/fontawesome.ts",
+        "~/plugins/eventBus.client.ts"
     ],
+    nitro: {
+        serveStatic: true,
+        handlers: [
+            {
+                middleware: true,
+                route: "/",
+                handler: "~/middleware/set-same-origin-headers.ts"
+            }
+        ]
+    },
+    build: {
+        transpile: [
+            '@fortawesome/vue-fontawesome',
+            '@fortawesome/fontawesome-svg-core',
+            '@fortawesome/pro-solid-svg-icons',
+            '@fortawesome/pro-regular-svg-icons',
+            '@fortawesome/free-brands-svg-icons'
+        ],
+    },
     tailwindcss: {
         configPath: 'tailwind.config.js',
         cssPath: '~/assets/css/tailwind.css',
