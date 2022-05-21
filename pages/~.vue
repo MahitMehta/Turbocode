@@ -3,7 +3,7 @@
         <div class="head">
             <h3>Projects</h3>
         </div>
-        <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+        <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-[50%] h-[10%] border-10 border-white">
             <div class="p-4">
 
             </div>
@@ -11,7 +11,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .container {
     font-family: 'Courier New';
     display: flex;
@@ -21,10 +21,13 @@
 }
 .head {
     color:#971F1F;
-    margin-top: -30%;
-    margin-left: -40%;
+    transform: translate(-100px, -100px);
     font-size: 25px;
     margin-bottom: 20px;
     text-decoration: none;
 }
 </style>
+
+<script>
+
+</script>
