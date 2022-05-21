@@ -1,4 +1,4 @@
-let bytecode:any = {};
+let bytecode = {};
 
 onmessage = async (e) => {
     switch(e.data.type) {

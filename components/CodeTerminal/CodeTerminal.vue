@@ -135,7 +135,11 @@ export default {
         this.$data.generalInt32 = new Int32Array(this.$data.generalSAB);
         this.$data.inputInt32 = new Int32Array(this.$data.inputSAB);
 
-        const worker = new Worker("./assets/pwa/codebuilder.worker.ts");
+        const file = await fetch("https://d1cllsacqk1ao3.cloudfront.net/codebuilder.worker.js");
+        const blob = await file.blob();
+        const blobUrl = window.URL.createObjectURL(blob);
+
+        const worker = new Worker(blobUrl);
         this.$data.worker = worker;
 
         this.buildProgram();
