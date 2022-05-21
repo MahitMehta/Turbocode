@@ -1,5 +1,5 @@
 <template>
-    <div class="container h-screen w-screen">
+    <div class="bg-[#151515] h-screen w-screen flex justify-center items-center flex-col">
         <div class="heading">
             <p>Morb.it</p>
         </div>
@@ -21,7 +21,7 @@
     </div>
 </template>
 
-<style>
+<style scoped>
 .container {
     font-family: 'Courier New';
     display: flex;

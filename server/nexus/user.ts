@@ -30,7 +30,7 @@ export const Mutation = extendType({
         const res = await prisma.user.create({
           data: { email, pass: hash, username }
         });
-        return res; 
+        return res;
       }
     })
   
