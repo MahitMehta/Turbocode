@@ -23,11 +23,11 @@
     background: #151515;
 }
 .head {
-    color:#971F1F;
+    color:#0A758F;
     transform: translate(-300px, -110px);
     font-size: 25px;
     text-decoration: none;
-    margin-top: 200px;
+    margin-top: 250px;
 }
 .create {
     transform: Translate(0px, -150px);
