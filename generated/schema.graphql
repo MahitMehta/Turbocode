@@ -3,9 +3,7 @@
 
 
 type Mutation {
-  createUser(email: String!, pass: String!, username: String!): User
-  createUserFile(code: String, filePath: String!, name: String!, srcProjectId: String!): UserFile
-  createUserProject(id: String!, name: String!, ownerId: String!): UserProject
+  createUser(email: String!, name: String!, pass: String!, type: String!): User
   loginClient(email: String!, pass: String!, type: String!): User
 }
 
@@ -18,18 +16,5 @@ type User {
   id: ID
   name: String
   pass: String
-}
-
-type UserFile {
-  code: String
-  filePath: String
-  id: ID
-  name: String
-  srsProjectId: String
-}
-
-type UserProject {
-  id: ID
-  name: String
-  ownerId: String
+  roles: [String]
 }
