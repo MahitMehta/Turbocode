@@ -1,10 +1,12 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "npm run prisma:update && nuxt build",
+    "prestart": "npm run prisma:update",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "generate": "npx prisma generate",
+    "preview": "nuxt preview",
+    "prisma:update": "npm run generate && npx prisma db push"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^5.0.4",

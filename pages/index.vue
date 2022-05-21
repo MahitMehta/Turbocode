@@ -4,7 +4,7 @@
             <p>Morb.it</p>
         </div>
         <div class="subhead">
-            <h3>An actually fast browser IDE</h3>
+            <h3>A morbin'-fast browser IDE</h3>
         </div>
         <div class="align-items-center w-[12%] h-[30%] buttonline">
             <div class="sign">
@@ -22,23 +22,28 @@
 </template>
 
 <style scoped>
+
+
+p {
+    background-image: url('morb.webp');
+}
 .container {
     font-family: 'Courier New';
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #151515;
+    background: #074b55;
 }
 .heading {
-    color: #0A758F;
+    color: #2AD5DD;
     margin-top: 10%;
-    font-size: 75px;
+    font-size: 100px;
     margin-bottom: 20px;
     text-decoration: none;
 }
 .subhead {
-    color: #971F1F;
+    color: #9B454F;
     font-size: 20px;
     text-decoration: none;
     margin-bottom: 35px;
