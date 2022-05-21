@@ -36,7 +36,18 @@ export interface NexusGenObjects {
     id?: string | null; // ID
     name?: string | null; // String
     pass?: string | null; // String
-    roles?: Array<string | null> | null; // [String]
+  }
+  UserFile: { // root type
+    code?: string | null; // String
+    filePath?: string | null; // String
+    id?: string | null; // ID
+    name?: string | null; // String
+    srsProjectId?: string | null; // String
+  }
+  UserProject: { // root type
+    id?: string | null; // ID
+    name?: string | null; // String
+    ownerId?: string | null; // String
   }
 }
 
@@ -53,6 +64,8 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createUser: NexusGenRootTypes['User'] | null; // User
+    createUserFile: NexusGenRootTypes['UserFile'] | null; // UserFile
+    createUserProject: NexusGenRootTypes['UserProject'] | null; // UserProject
     loginClient: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
@@ -63,13 +76,26 @@ export interface NexusGenFieldTypes {
     id: string | null; // ID
     name: string | null; // String
     pass: string | null; // String
-    roles: Array<string | null> | null; // [String]
+  }
+  UserFile: { // field return type
+    code: string | null; // String
+    filePath: string | null; // String
+    id: string | null; // ID
+    name: string | null; // String
+    srsProjectId: string | null; // String
+  }
+  UserProject: { // field return type
+    id: string | null; // ID
+    name: string | null; // String
+    ownerId: string | null; // String
   }
 }
 
 export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createUser: 'User'
+    createUserFile: 'UserFile'
+    createUserProject: 'UserProject'
     loginClient: 'User'
   }
   Query: { // field return type name
@@ -80,7 +106,18 @@ export interface NexusGenFieldTypeNames {
     id: 'ID'
     name: 'String'
     pass: 'String'
-    roles: 'String'
+  }
+  UserFile: { // field return type name
+    code: 'String'
+    filePath: 'String'
+    id: 'ID'
+    name: 'String'
+    srsProjectId: 'String'
+  }
+  UserProject: { // field return type name
+    id: 'ID'
+    name: 'String'
+    ownerId: 'String'
   }
 }
 
@@ -88,9 +125,19 @@ export interface NexusGenArgTypes {
   Mutation: {
     createUser: { // args
       email: string; // String!
-      name: string; // String!
       pass: string; // String!
-      type: string; // String!
+      username: string; // String!
+    }
+    createUserFile: { // args
+      code?: string | null; // String
+      filePath: string; // String!
+      name: string; // String!
+      srcProjectId: string; // String!
+    }
+    createUserProject: { // args
+      id: string; // String!
+      name: string; // String!
+      ownerId: string; // String!
     }
     loginClient: { // args
       email: string; // String!

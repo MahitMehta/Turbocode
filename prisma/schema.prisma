@@ -11,6 +11,20 @@ model User {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   email   String   @unique
   pass    String   
-  name    String? 
-  roles   String[]
+  username    String? 
+  projectIds String[] @db.ObjectId 
+}
+
+model UserFile {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  name    String
+  code    String   @default("")   
+  filePath String
+  srcProjectId String @db.ObjectId
+}
+
+model UserProject {
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId String   @db.ObjectId 
+  name String  
 }
