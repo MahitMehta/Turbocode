@@ -32,7 +32,6 @@ export default {
     },
     methods: {
         runCode() {
-            console.log("hello")
            // this.buildProgram();
         },
         async buildProgram() {
@@ -126,6 +125,8 @@ export default {
         }
     },
     async mounted() {
+        console.log(navigator.userAgent);
+
         this.$bus.$on("runTerminal", () => {
            // this.term.clear();
             term.writeln("java Entry.java");

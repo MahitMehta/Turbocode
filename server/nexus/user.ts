@@ -24,13 +24,15 @@ export const Mutation = extendType({
         pass: nonNull(stringArg()),
         username: nonNull(stringArg()),
       },
-      resolve: async (_, { email, pass, username }, { prisma }) => {
+      resolve: async (_, { email, pass, username }, { prisma, res }) => {
 
         const hash = await PasswordUtil.hash(pass);
-        const res = await prisma.user.create({
+        const user = await prisma.user.create({
           data: { email, pass: hash, username }
         });
-        return res;
+
+        setAuthState(user, res as unknown as CompatibilityEvent);
+        return user;
       }
     })
   

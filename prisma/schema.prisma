@@ -11,13 +11,13 @@ model User {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
   email   String   @unique
   pass    String   
-  username    String? 
+  username    String? @unique
   projectIds String[] @db.ObjectId 
 }
 
 model UserFile {
   id      String   @id @default(auto()) @map("_id") @db.ObjectId
-  name    String
+  name    String   
   code    String   @default("")   
   filePath String
   srcProjectId String @db.ObjectId

@@ -19,6 +19,27 @@
 </div>
 </div>
 </template>
+<script>
+
+export default {
+    data() {
+        return {
+            username: "",
+            pass: "",
+            error: ""
+        }
+    },
+    watch: {
+        pass(){
+            this.$data.error = "";
+        },
+        username(){
+            this.$data.error = "";
+        }
+    }
+}
+
+</script>
 
 <style scoped>
 .container {
