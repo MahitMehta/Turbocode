@@ -2,5 +2,44 @@ import { defineNuxtConfig } from 'nuxt'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
-
+    components: true,
+    publicRuntimeConfig: {
+        graphqlApiURL: process.env.GRAPHQL_API_URL || "http://localhost:3000/api/graphql",
+    },
+    app: {
+        head: {
+            title: 'C4T Game',
+            htmlAttrs: {
+                lang: 'en',
+            },
+            meta: [
+                { charset: 'utf-8' },
+                { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+                { hid: 'description', name: 'description', content: '' },
+                { name: 'format-detection', content: 'telephone=no' },
+                { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
+            ],
+            link: [],
+            script: [],
+        },
+    },
+    css: ['@/assets/css/main.css'],
+    vue: {
+        compilerOptions: {
+            comments: false,
+        },
+    },
+    buildModules: [
+        // https://go.nuxtjs.dev/tailwindcss
+        '@nuxtjs/tailwindcss',
+        '@nuxt-hero-icons/solid/nuxt',
+        '@nuxt-hero-icons/outline/nuxt',
+    ],
+    plugins: [
+        "~/plugins/apolloClient.ts",
+    ],
+    tailwindcss: {
+        configPath: 'tailwind.config.js',
+        cssPath: '~/assets/css/tailwind.css',
+    }
 })
