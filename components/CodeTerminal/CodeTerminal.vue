@@ -25,10 +25,16 @@ export default {
     watch: {
         code() {
             this.$data.blobUrl = undefined; 
+        },
+        user() {
+            if (this.$props.user.username) {
+                this.promptTerm();
+            }
         }
     },
     props: {
-        code: String
+        code: String,
+        user: Object,
     },
     methods: {
         runCode() {
@@ -122,7 +128,8 @@ export default {
         },
         async promptTerm() {
             const moment = await import("moment");
-            const shellPrompt=  `user@${moment.default().format().toString()} ~ % `;
+            const username = this.$props.user?.username;
+            const shellPrompt=  `${username ? username.split(" ").join("") : "user"}@${moment.default().format().toString()} ~ % `;
             this.$data.term.write('\r\n' + shellPrompt);
         }
     },
@@ -174,8 +181,6 @@ export default {
             },
         }
         fitAddon.fit();
-
-        this.promptTerm();
         
         let cmd = '';
 

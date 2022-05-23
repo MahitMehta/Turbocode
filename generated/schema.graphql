@@ -10,14 +10,14 @@ type Mutation {
 }
 
 type Query {
-  ok: Boolean!
+  getUser: User
 }
 
 type User {
   email: String
   id: ID
-  name: String
   pass: String
+  username: String
 }
 
 type UserFile {

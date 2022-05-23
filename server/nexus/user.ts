@@ -10,11 +10,24 @@ export const User = objectType({
       t.id("id")
       t.string('email');
       t.string('pass');
-      t.string('name');
+      t.string('username');
     }
 });
 
-export const Mutation = extendType({
+export const UserQuery = extendType({
+  type: "Query",
+  definition(t) {
+    t.field("getUser", {
+      type: "User",
+      resolve: async (_, _args, { prisma, auth }) => {
+        const user = await prisma.user.findFirst({ where: { id: auth.id }})
+        return user; 
+      }
+    })
+  }
+});
+
+export const UserMutation = extendType({
   type: 'Mutation',
   definition(t) {
     t.field('createUser', {

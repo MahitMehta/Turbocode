@@ -34,8 +34,8 @@ export interface NexusGenObjects {
   User: { // root type
     email?: string | null; // String
     id?: string | null; // ID
-    name?: string | null; // String
     pass?: string | null; // String
+    username?: string | null; // String
   }
   UserFile: { // root type
     code?: string | null; // String
@@ -69,13 +69,13 @@ export interface NexusGenFieldTypes {
     loginClient: NexusGenRootTypes['User'] | null; // User
   }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    getUser: NexusGenRootTypes['User'] | null; // User
   }
   User: { // field return type
     email: string | null; // String
     id: string | null; // ID
-    name: string | null; // String
     pass: string | null; // String
+    username: string | null; // String
   }
   UserFile: { // field return type
     code: string | null; // String
@@ -99,13 +99,13 @@ export interface NexusGenFieldTypeNames {
     loginClient: 'User'
   }
   Query: { // field return type name
-    ok: 'Boolean'
+    getUser: 'User'
   }
   User: { // field return type name
     email: 'String'
     id: 'ID'
-    name: 'String'
     pass: 'String'
+    username: 'String'
   }
   UserFile: { // field return type name
     code: 'String'

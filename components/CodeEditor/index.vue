@@ -7,7 +7,7 @@
             </div>
         </nav>
         <ClientOnly>
-            <code-terminal :code="code"/>
+            <code-terminal :user="$props.user" :code="code"/>
             <Codemirror
                 :options="cmOptions"
                 :value="code"
@@ -21,6 +21,9 @@
 </template>
 <script lang="ts">
 export default {
+    props: {
+        user: Object 
+    },  
     methods: {
         change(e:string) {
            localStorage.setItem("code", e);
