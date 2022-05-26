@@ -1,3 +1,3 @@
 export * from "./user";
-export * from "./userFile";
+export * from "./userFileObject";
 export * from "./userProject";

@@ -1,4 +1,4 @@
-import { objectType, mutationType, stringArg, nonNull, extendType, list } from "nexus";
+import { objectType, stringArg, nonNull, extendType } from "nexus";
 import PasswordUtil from "~~/utils/password";
 import { HttpError } from "graphql-helix";
 import { setAuthState } from "~~/utils/jwt";

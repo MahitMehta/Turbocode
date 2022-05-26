@@ -4,13 +4,14 @@
 
 type Mutation {
   createUser(email: String!, pass: String!, username: String!): User
-  createUserFile(code: String, filePath: String!, name: String!, srcProjectId: String!): UserFile
-  createUserProject(id: String!, name: String!, ownerId: String!): UserProject
+  createUserFileObject(code: String, filePath: String!, name: String!, projectId: String!, type: String!): UserFileObject
+  createUserProject(name: String!): UserProject
   loginClient(email: String!, pass: String!): User
 }
 
 type Query {
   getUser: User
+  getUserProject(id: String!): UserProject
 }
 
 type User {
@@ -20,15 +21,17 @@ type User {
   username: String
 }
 
-type UserFile {
+type UserFileObject {
   code: String
   filePath: String
   id: ID
   name: String
-  srsProjectId: String
+  projectId: String
+  type: String
 }
 
 type UserProject {
+  files(projectId: String!): [UserFileObject]
   id: ID
   name: String
   ownerId: String

@@ -1,6 +1,6 @@
 <template>
-    <div @run="runCode" class="absolute bottom-0 z-50 bg-grey border border-solid h-[300px] overflow-hidden border-t-[#32342f] w-full">
-        <div class="p-4 px-8 relative z-50 w-full bottom-3 h-full" id="terminal"></div>
+    <div class="absolute bottom-0 z-50 bg-grey border border-solid h-[300px] overflow-hidden border-t-[#32342f] w-full">
+        <div class="p-4 pt-10 px-8 relative z-50 w-full bottom-3 h-full" id="terminal"></div>
     </div>
 </template>
 <script lang="ts">
@@ -26,20 +26,12 @@ export default {
         code() {
             this.$data.blobUrl = undefined; 
         },
-        user() {
-            if (this.$props.user.username) {
-                this.promptTerm();
-            }
-        }
     },
     props: {
         code: String,
         user: Object,
     },
     methods: {
-        runCode() {
-           // this.buildProgram();
-        },
         async buildProgram() {
             const worker:Worker = this.$data.worker; 
             if (!worker) return; 
@@ -50,7 +42,7 @@ export default {
             // 
             const buildURL = process.env.NODE_ENV === "development" ? 
                 "http://localhost:8080" : 
-                "https://us-central1-mah-it.cloudfunctions.net/jbytecoder-builder"; //https://us-central1-mah-it.cloudfunctions.net/jbytecoder-builder
+                "https://us-central1-mah-it.cloudfunctions.net/jbytecoder-builder"; 
             
             const res = await fetch(buildURL, {
                 method: "POST",
@@ -149,7 +141,7 @@ export default {
         let workerURL; 
 
         if (process.env.NODE_ENV === "development") {
-            workerURL = "./assets/pwa/codebuilder.worker.js";
+            workerURL = "../assets/pwa/codebuilder.worker.js";
         } else {
             const file = await fetch("https://d1cllsacqk1ao3.cloudfront.net/codebuilder.worker.js");
             const blob = await file.blob();
@@ -180,6 +172,7 @@ export default {
                 background: "#181818",
             },
         }
+        this.promptTerm();
         fitAddon.fit();
         
         let cmd = '';

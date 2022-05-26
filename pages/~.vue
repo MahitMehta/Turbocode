@@ -12,15 +12,35 @@
     </div>
 </template>
 <script>
+import { gql, useMutation } from '@urql/vue';
 
 export default {
     methods: {
-        createProject() {
+        async createProject() {
+            const { data } = await this.createUserProject({ 
+                name: "New Java Project"
+            });
+            const projectId = data?.createUserProject?.id; 
+            if (!projectId) return; 
             navigateTo({ 
-                path: "/editor",
+                path: `/editor/${projectId}`,
             })
         }
-    }
+     },
+     setup() {
+        const mutation = gql`
+                mutation createUserProject($name: String!) {
+                    createUserProject(name:$name) {
+                        id
+                    }
+                }
+            `;
+        const { executeMutation:createUserProject, fetching:attemptingProjectCreation } = useMutation(mutation);
+        return {
+            createUserProject,
+            attemptingProjectCreation
+        }
+    },
 }
 
 </script>

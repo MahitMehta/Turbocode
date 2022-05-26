@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-            title: 'Morb.it',
+            title: 'Turbocode',
         },
     },
     css: ['@/assets/css/main.css'],
