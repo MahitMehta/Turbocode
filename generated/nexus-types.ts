@@ -68,6 +68,7 @@ export interface NexusGenFieldTypes {
     createUserFileObject: NexusGenRootTypes['UserFileObject'] | null; // UserFileObject
     createUserProject: NexusGenRootTypes['UserProject'] | null; // UserProject
     loginClient: NexusGenRootTypes['User'] | null; // User
+    modifyUserFileObject: NexusGenRootTypes['UserFileObject'] | null; // UserFileObject
   }
   Query: { // field return type
     getUser: NexusGenRootTypes['User'] | null; // User
@@ -101,6 +102,7 @@ export interface NexusGenFieldTypeNames {
     createUserFileObject: 'UserFileObject'
     createUserProject: 'UserProject'
     loginClient: 'User'
+    modifyUserFileObject: 'UserFileObject'
   }
   Query: { // field return type name
     getUser: 'User'
@@ -148,6 +150,10 @@ export interface NexusGenArgTypes {
     loginClient: { // args
       email: string; // String!
       pass: string; // String!
+    }
+    modifyUserFileObject: { // args
+      code?: string | null; // String
+      fileId: string; // ID!
     }
   }
   Query: {

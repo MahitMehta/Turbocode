@@ -1,6 +1,17 @@
 <template>
     <div class="absolute bottom-0 z-50 bg-grey border border-solid h-[300px] overflow-hidden border-t-[#32342f] w-full">
-        <div class="p-4 pt-10 px-8 relative z-50 w-full bottom-3 h-full" id="terminal"></div>
+        <div class="px-8 py-4 flex justify-between">
+            <p class="text-white uppercase text-sm">Terminal</p>
+            <div>
+                 <IconButton
+                    @click="$bus.$emit('hideTerminal')" 
+                    :width="12" 
+                    color="#fff" 
+                    :icon="['fas', 'xmark']" 
+                />
+            </div>
+        </div>
+        <div class="p-4 px-8 relative z-50 h-[225px] w-full bottom-3" id="terminal"></div>
     </div>
 </template>
 <script lang="ts">
@@ -171,6 +182,7 @@ export default {
             theme: {
                 background: "#181818",
             },
+            rightClickSelectsWord: true,
         }
         this.promptTerm();
         fitAddon.fit();
@@ -178,6 +190,10 @@ export default {
         let cmd = '';
 
         const that = this; 
+
+        term.onRender(() => {
+            fitAddon.fit();
+        });
 
         term.onKey(({ key, domEvent }) => {
             var printable = (

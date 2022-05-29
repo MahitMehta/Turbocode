@@ -1,7 +1,7 @@
 import { GlobalCmComponent } from "codemirror-editor-vue3";
 import "codemirror/mode/clike/clike";
 import "codemirror/addon/edit/matchbrackets";
-import "codemirror/addon/edit/closebrackets";
+import "codemirror/addon/edit/closebrackets.js";
 import "codemirror/addon/hint/show-hint";
 import "codemirror/addon/dialog/dialog";
 import "codemirror/addon/fold/foldcode";

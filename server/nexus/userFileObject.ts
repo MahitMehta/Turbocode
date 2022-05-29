@@ -1,4 +1,4 @@
-import { objectType, stringArg, nonNull, extendType } from "nexus";
+import { objectType, stringArg, nonNull, extendType, idArg } from "nexus";
 
 
 export const UserFileObject = objectType({
@@ -31,6 +31,26 @@ export const UserFileMutation = extendType({
           data: { name, code, filePath, projectId, type }
         });
         return res;
+      }
+    })
+    t.field('modifyUserFileObject', {
+      type: "UserFileObject",
+      args: {
+        code: stringArg(),
+        fileId: nonNull(idArg())
+      },
+      resolve: async (_, { code, fileId }, { prisma }) => {
+          // TODO: Need to check if project (projectId) is owned by user before mutating file
+          const data:any = {};
+
+          if (code) data.code = code; 
+
+          const res = await prisma.userFileObject.update({
+            where: { id: fileId }, 
+            data
+          })
+
+          return res; 
       }
     })
   }

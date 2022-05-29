@@ -3,7 +3,8 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { 
     faPlay, faFolderPlus, faFileCirclePlus,
     faFolderClosed, faFolderOpen,
-    faAngleRight, faAngleDown, faXmark
+    faAngleRight, faAngleDown, faXmark,
+    faCircle,
 } from '@fortawesome/free-solid-svg-icons'
 
 // This is important, we are going to let Nuxt.js worry about the CSS
@@ -14,7 +15,7 @@ config.autoAddCss = false;
 library.add(
     faPlay, faFolderPlus, faFileCirclePlus,
     faFolderOpen, faFolderClosed,
-    faAngleRight, faAngleDown, faXmark
+    faAngleRight, faAngleDown, faXmark,faCircle
 )
 
 // Register the component globally

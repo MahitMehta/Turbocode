@@ -16,7 +16,7 @@ export default defineNuxtConfig({
     },
     app: {
         head: {
-            title: 'Turbocode',
+            title: 'Turbocode.it',
         },
     },
     css: ['@/assets/css/main.css'],

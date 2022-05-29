@@ -1,15 +1,17 @@
 <template>
     <div class="flex flex-col bg-grey w-full relative">
-        <nav class="w-full h-14 bg-grey justify-between flex pr-6">
+        <nav class="w-full h-14 bg-grey justify-between items-center flex pr-6">
             <TabManager 
                 :files="files" 
                 :filesOpen="filesOpen" 
                 :fileSelectedId="fileSelectedId"
             />
-            <div @click="runTerminal" class="flex space-x-2 items-center cursor-pointer">
-                <font-awesome-icon :width="12" color="#fff" :icon="['fas', 'play']" />
-                <!-- <span class="text-white font-medium text-sm">Run</span> -->
-            </div>
+            <IconButton  
+                @click="runTerminal"
+                :width="10" 
+                color="#fff" 
+                :icon="['fas', 'play']" 
+            />
         </nav>
          <div 
             v-if="!fileSelectedId"
@@ -41,15 +43,44 @@
     </div>
 </template>
 <script lang="ts">
+import { UserFileObject } from '.prisma/client';
+import { fileSystemStore } from "~/store/FileSystemStore";
+import { gql, useMutation } from '@urql/vue';
+
 export default {
     props: {
         user: Object,
         files: Array,
     },  
     methods: {
+        injectCode(fileId:string) {
+            const cachedCode = fileSystemStore.getState().files[fileId]; 
+            if (cachedCode) {
+                this.$data.code = cachedCode.code;
+            } else {
+                const file = this.$props.files.find((f:UserFileObject) => f.id === fileId);
+                this.$data.code = file.code;
+            }
+        },  
         change(e:string) {
-           localStorage.setItem("code", e);
-           this.$data.code = e;
+            this.$data.code = e; 
+        },
+        handleKeyDown(e) {
+            const currentFile = this.fileSystemState.files[this.$data.fileSelectedId]; 
+            const cmdKeyPressed = e.metaKey || e.ctrlKey;
+            if (cmdKeyPressed && e.code === "KeyS") {
+                e.preventDefault();
+                e.stopPropagation();
+                if (currentFile.saved || this.$data.savingCode) return; 
+                
+                this.$data.savingCode = true; 
+                this.modifyCode({ code: currentFile.code, fileId: currentFile.id })
+                    .then(() => {
+                        fileSystemStore.setFileSaved(currentFile.id);
+                    }).finally(() => {
+                        this.$data.savingCode = false; 
+                    });
+            }
         },
         runTerminal() {
             this.$data.showTerminal = true;
@@ -58,14 +89,26 @@ export default {
             });
         }
     },
+    watch: {
+        code() {
+            const file = this.$props.files.find((f:UserFileObject) => f.id === this.$data.fileSelectedId);
+
+            fileSystemStore.setFile({ 
+                ...file,
+                code: this.$data.code,
+                saved: this.$data.code === file.code,
+            });
+        }
+    },
     data() {
         return {
+            savingCode: false,
             filesOpen: [],
             fileSelectedId: null,
             showTerminal: false,
             width: 0,
             height: 0,
-            code: `// New Java File...\n`,
+            code: "",
             cmOptions: {
                 mode: "text/x-java", 
                 theme: "monokai", 
@@ -75,19 +118,40 @@ export default {
                 foldGutter: true, 
                 styleActiveLine: true,
                 matchBrackets: true,
+                autoCloseBrackets: true,
             } 
         }
+    },
+    setup() {
+        const modifyCodeMutation = gql`
+                mutation updateFile($code: String!, $fileId:ID!) {
+                    modifyUserFileObject(code:$code, fileId:$fileId) {
+                        code
+                    }
+                }
+            `;
+        const { executeMutation:modifyCode } = useMutation(modifyCodeMutation);
+
+        return {
+            modifyCode,
+            fileSystemState: fileSystemStore.getState(),
+            isInitialized: fileSystemStore.getIsInitialized(),
+        }
+    },
+    unmounted() {
+        window.removeEventListener("keydown", this.handleKeyDown);
     },
     mounted() {
         const that = this; 
 
-        const cachedCode = localStorage.getItem("code");
-        if (!!cachedCode) {
-            this.$data.code = cachedCode; 
-        }
+         window.addEventListener("keydown", this.handleKeyDown); 
 
         this.$data.width = window.innerWidth * 0.5; 
         this.$data.height = window.innerHeight; 
+
+        this.$bus.$on("hideTerminal", () => {
+            this.$data.showTerminal = false; 
+        }); 
 
         this.$bus.$on("deleteTab", (fileId:string) => {
             that.$data.filesOpen = that.$data.filesOpen.filter((id:string) => id !== fileId);
@@ -103,8 +167,15 @@ export default {
             if (!that.$data.filesOpen.includes(fileId)) {
                 that.$data.filesOpen.push(fileId);
                 that.$data.fileSelectedId = fileId; 
+                that.injectCode(that.$data.fileSelectedId);
             }
         }); 
+
+        this.$bus.$on("switchTab", (fileId:string) => {
+            that.$data.fileSelectedId = fileId;
+
+            that.injectCode(that.$data.fileSelectedId);
+        });
     }
  }
 </script>

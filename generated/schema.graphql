@@ -7,6 +7,7 @@ type Mutation {
   createUserFileObject(code: String, filePath: String!, name: String!, projectId: String!, type: String!): UserFileObject
   createUserProject(name: String!): UserProject
   loginClient(email: String!, pass: String!): User
+  modifyUserFileObject(code: String, fileId: ID!): UserFileObject
 }
 
 type Query {

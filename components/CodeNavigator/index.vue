@@ -5,13 +5,13 @@
         </p>
         <div class="flex items-center mt-5 justify-between">
             <p class="text-white text-sm font-semibold">{{ $props.projectName }}</p>
-            <div class="flex items-center space-x-3">
-                <font-awesome-icon :width="15" color="#fff" :icon="['fas', 'file-circle-plus']" />
-                <font-awesome-icon :width="15" color="#fff" :icon="['fas', 'folder-plus']" />
+            <div class="flex items-center space-x-1">
+                <IconButton :width="15" color="#fff" :icon="['fas', 'file-circle-plus']" />
+                <IconButton :width="15" color="#fff" :icon="['fas', 'folder-plus']" />
             </div>
         </div>
 
-        <ul class="space-y-2 mt-4">
+        <ul class="space-y-2 ml-2 mt-4">
             <FileObject 
                 v-for="file in files" 
                 :key="file.id" 
@@ -35,9 +35,10 @@ export default {
         }
     },
     watch: {
-        files() {
-            this.$data.files = this.createFileStructure(this.$props.files, "/")
-        }
+        // TODO: Infinite recursive loop, find way to update file directory on change
+        // files() {
+        //     this.$data.files = this.createFileStructure(this.$props.files, "/")
+        // }
     },
     methods: {
         createFileStructure(files:UserFileObject[], path:string) {
