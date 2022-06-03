@@ -10,6 +10,8 @@ export const UserFileObject = objectType({
       t.string('filePath');
       t.string('projectId');
       t.string('type');
+      t.dateTime("createdAt")
+      t.dateTime("updatedAt")
     }
 });
 

@@ -6,12 +6,20 @@
                 :filesOpen="filesOpen" 
                 :fileSelectedId="fileSelectedId"
             />
-            <IconButton  
-                @click="runTerminal"
-                :width="10" 
-                color="#fff" 
-                :icon="['fas', 'play']" 
-            />
+            <div class="flex justify-center items-center space-x-2">
+                <IconButton  
+                    @click="runTerminal"
+                    :width="10" 
+                    color="#fff" 
+                    :icon="['fas', 'play']" 
+                />
+                <IconButton  
+                    @click="fullScreen"
+                    :width="10" 
+                    color="#fff" 
+                    :icon="isFullScreen ? ['fas', 'minimize'] : ['fas', 'expand']" 
+                />
+            </div>
         </nav>
          <div 
             v-if="!fileSelectedId"
@@ -53,6 +61,19 @@ export default {
         files: Array,
     },  
     methods: {
+        fullScreen() {
+            const that = this; 
+            
+            if (this.$data.isFullScreen) {
+                document.exitFullscreen().then(() => {
+                    that.$data.isFullScreen = false;
+                });
+            } else {
+                document.body.requestFullscreen().then(() => {
+                    that.$data.isFullScreen = true; 
+                });
+            }
+        },
         injectCode(fileId:string) {
             const cachedCode = fileSystemStore.getState().files[fileId]; 
             if (cachedCode) {
@@ -102,6 +123,7 @@ export default {
     },
     data() {
         return {
+            isFullScreen: false,
             savingCode: false,
             filesOpen: [],
             fileSelectedId: null,
@@ -144,7 +166,7 @@ export default {
     mounted() {
         const that = this; 
 
-         window.addEventListener("keydown", this.handleKeyDown); 
+        window.addEventListener("keydown", this.handleKeyDown); 
 
         this.$data.width = window.innerWidth * 0.5; 
         this.$data.height = window.innerHeight; 

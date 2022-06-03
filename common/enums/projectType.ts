@@ -1,0 +1,4 @@
+export enum EProjectType {
+    JAVA_8_WEB_JVM = "JAVA_8_WEB_JVM",
+    JAVA_11_TRANSPILER = "JAVA_11_TRANSPILER"
+}

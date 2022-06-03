@@ -1,7 +1,7 @@
 <template>
     <ul class="flex items-center h-full">
         <li 
-            v-bind:class="{ 'border-t-purple-500': fileSelectedId === fileId }"
+            v-bind:class="{ 'border-t-blue-500': fileSelectedId === fileId }"
             class="list-none border-l-0 text-white border border-[#32342f] border-solid h-full p-3 flex justify-center items-center"
             :key="fileId"
             v-for="fileId in $props.filesOpen"
